@@ -29,7 +29,12 @@
                     <td><%= article.title %></td>
                     <td><%= article.slug %></td>
                     <td><%= article.Categoria.title%></td>
-                    <td></td>
+                    <td>
+                        <form action="/artigo/delete" method="POST" style="display: inline;" onsubmit="confirmarDelecao(event, this)">
+                            <input type="hidden" name="id" value=" <%= article.id %> ">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
                 </tr>
 
             <% }) %>
