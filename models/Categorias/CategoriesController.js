@@ -83,7 +83,7 @@ Router.get("/admin/categorias/edit/:id", (req,res)=>{
 
 Router.post('/categorias/update', (req, res)=>{
 
-    let id =req.body.id
+    let id = req.body.id
     let title = req.body.title
 
     Categoria.update({title:title, slug: slugify(title)},{

@@ -19,16 +19,14 @@ const Article = connection.define('Artigo', {
     }
 })
 
-/*
+Category.hasMany(Article);
+Article.belongsTo(Category);
+
+
 Article.sync({force: false}).then(() =>{
     console.log('Tabela Artigo criada')
 }).catch(err =>{
     console.log('Tabela ERROR!' + err)
 });
-
-*/
-
-Category.hasMany(Article);
-Article.belongsTo(Category);
 
 module.exports = Article;
