@@ -6,6 +6,14 @@ const Categorias = require('./models/Categorias/CategoriesController')
 const Artigos = require('./models/Artigos/ArtigoController')
 const CategoriaModels = require('./models/Categorias/CategoriesModels')
 const ArtigosModels = require('./models/Artigos/ArtigoModel')
+const Users = require('./models/User/UserController')
+const session = require('express-session');
+
+//sessions
+app.use(session({
+    secret: 'adminsecret',
+    cookie: {maxAge: 10000000}
+}))
 
 //Conexão Banco de Dados
 connection.authenticate().then(() =>{
@@ -29,7 +37,8 @@ app.get('/', (req, res) =>{
     ArtigosModels.findAll({
         order:[
             ['id', 'DESC']
-        ]
+        ],
+        limit:4
     }).then((articles)=>{
 
         CategoriaModels.findAll().then((categories)=>{
@@ -62,7 +71,7 @@ app.get('/categoria/:slug', (req, res)=>{
         },
         include: [{ model: ArtigosModels}]
     }).then((category)=>{
-        if(category !== undefined){
+        if(category != undefined){
             CategoriaModels.findAll().then((categories)=>{
                 res.render('index', {articles: category.articles, categories: categories});
             });
@@ -74,8 +83,12 @@ app.get('/categoria/:slug', (req, res)=>{
     })
 })
 
+
+
+
 app.use('/', Categorias);
 app.use('/', Artigos);
+app.use('/', Users);
 
 
 
