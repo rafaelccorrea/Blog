@@ -28,12 +28,13 @@
                     <td><%= article.id %></td>
                     <td><%= article.title %></td>
                     <td><%= article.slug %></td>
-                    <td><%= article.Categoria.title%></td>
+                    <td><%= article.Categoria.title %></td>
                     <td>
                         <form action="/artigo/delete" method="POST" style="display: inline;" onsubmit="confirmarDelecao(event, this)">
                             <input type="hidden" name="id" value=" <%= article.id %> ">
                             <button class="btn btn-danger">Deletar</button>
                         </form>
+                            <a href="/artigo/edit/<%= article.id %>" class="btn btn-warning">Editar</a>
                     </td>
                 </tr>
 

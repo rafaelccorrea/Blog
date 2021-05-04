@@ -13,13 +13,13 @@ const Category =  connection.define('Categorias', {
     }
 })
 
-
+/*
 Category.sync({force: false}).then(() => {
     console.log('Tabela Categoria Criada com sucesso!')
 }).catch((err) => {
     console.log('Tabela Categoria ERROR!' + err)
 })
 
-
+*/
 
 module.exports = Category;

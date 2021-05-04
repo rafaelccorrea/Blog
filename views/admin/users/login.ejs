@@ -1,0 +1,21 @@
+<%- include('../../partials/header.ejs') %>
+
+<div class="container">
+    <hr>
+    <a class="btn btn-primary" href="/">Home</a><br>
+    <div class="card mt-2">
+        <div class="card-header">
+            <h2>Login Admin</h2>
+        </div>
+        <div class="card-body">
+            <form action="/authenticate" method="POST">
+                <input placeholder="email@email.com" type="email" name="email" class="form-control" required><br>
+                <input placeholder="****************" type="password" name="password" class="form-control" required><br>
+                <button type="submit" class="btn btn-primary btn-block">Logar</button> <br>
+                <a style="display: block;" href="/admin/users/create" class="btn btn-success">Cadastrar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>

@@ -2,14 +2,16 @@ const express = require('express');
 const Router = express.Router();
 const Categoria = require('./CategoriesModels')
 const slugify = require('slugify')
+const adminAuth = require('../../middlewares/adminAuth')
 
-Router.get('/admin/categorias/new', (req,res) => {
+
+Router.get('/admin/categorias/new', adminAuth, (req,res) => {
     res.render("admin/categories/new")
 })
 
 
 //Criando Categoria
-Router.post('/categories/save',(req,res)=>{
+Router.post('/categories/save', adminAuth, (req,res)=>{
     let title = req.body.title
     if(title != undefined){
         Categoria.create({
@@ -28,7 +30,7 @@ Router.post('/categories/save',(req,res)=>{
 })
 
 //Listando Categoria
-Router.get("/admin/categorias", (req,res) => {
+Router.get("/admin/categorias", adminAuth, (req,res) => {
 
     Categoria.findAll().then((categories) => {
         res.render("admin/categories/index", {categories: categories})
@@ -38,7 +40,7 @@ Router.get("/admin/categorias", (req,res) => {
 
 
 //Deletando Categoria
-Router.post("/categoria/delete",(req,res)=>{
+Router.post("/categoria/delete", adminAuth, (req,res)=>{
     let id = req.body.id;
     if(id != undefined){
         if(!isNaN(id)){
@@ -64,7 +66,7 @@ Router.post("/categoria/delete",(req,res)=>{
 
 //Edição de categoria
 
-Router.get("/admin/categorias/edit/:id", (req,res)=>{
+Router.get("/admin/categorias/edit/:id", adminAuth, (req,res)=>{
     let id = req.params.id
     if(isNaN(id)){
         res.redirect("/admin/categorias")
@@ -81,7 +83,7 @@ Router.get("/admin/categorias/edit/:id", (req,res)=>{
     })
 })
 
-Router.post('/categorias/update', (req, res)=>{
+Router.post('/categorias/update', adminAuth, (req, res)=>{
 
     let id = req.body.id
     let title = req.body.title
